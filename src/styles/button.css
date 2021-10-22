@@ -1,0 +1,22 @@
+button {
+    background: none;
+    border: none;
+    outline: none;
+    font-weight: bold;
+    font-size: inherit;
+    border-radius: 5px;
+    padding: 5px 20px;
+    cursor: pointer;
+}
+
+.add {
+    background: #31a331;
+}
+
+.edit {
+    background: #fad902;
+}
+
+.delete {
+    background: #ff0000;
+}

@@ -1,5 +1,6 @@
-import RecipeList from './RecipeList'
+import RecipeList from './components/RecipeList'
 import sampleRecipes from './DB/recipeDB'
+import './styles/app.css'
 
 function App() {
   return (

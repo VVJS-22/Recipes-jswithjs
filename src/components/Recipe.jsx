@@ -1,9 +1,12 @@
+import IncredientList from "./IncredientList"
+
 const Recipe = (props) => {
     const {
         name,
         servings,
         cookTime,
-        instructions
+        instructions,
+        incredients
     } = props
     return (
         <div>
@@ -11,8 +14,8 @@ const Recipe = (props) => {
                 <h3>{name}</h3>
             </div>
             <div>
-                <button>Edit</button>
-                <button>Delete</button>
+                <button className="edit">Edit</button>
+                <button className="delete">Delete</button>
             </div>
             <div>
                 <span>Cook Time:</span>
@@ -25,6 +28,12 @@ const Recipe = (props) => {
             <div>
                 <span>Insructions:</span>
                 <div>{instructions}</div>
+            </div>
+            <div>
+                <span>Incredients:</span>
+                <div>
+                    <IncredientList incredients={incredients}/>
+                </div>
             </div>
         </div>
     )
