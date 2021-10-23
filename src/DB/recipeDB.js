@@ -4,11 +4,11 @@ const sampleRecipes = [
         name: 'Briyani',
         servings: 3,
         cookTime: '1:00',
-        instructions: "1.Take rice\n 2.Take chicken\n 3.Cook Briyani\n 4.Eat Briyani",
+        instructions: `1.Take rice\n 2.Take chicken\n 3.Cook Briyani\n 4.Eat Briyani`,
         incredients: [
             {
                 id: 1,
-                name: 'Chicken',
+                name: 'Chicken',    
                 amount: '1Kg'
             },
             {

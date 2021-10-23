@@ -2,11 +2,13 @@ import IncredientList from "./IncredientList"
 
 const Recipe = (props) => {
     const {
+        id,
         name,
         servings,
         cookTime,
         instructions,
-        incredients
+        incredients,
+        handleDelete
     } = props
     return (
         <div>
@@ -15,7 +17,15 @@ const Recipe = (props) => {
             </div>
             <div>
                 <button className="edit">Edit</button>
-                <button className="delete">Delete</button>
+                <button
+                
+                className="delete"
+                onClick={() => {
+                    handleDelete(id)
+                }}
+                >
+                    Delete
+                </button>
             </div>
             <div>
                 <span>Cook Time:</span>

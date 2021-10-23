@@ -1,7 +1,11 @@
 import Recipe from "./Recipe"
 
 
-const RecipeList = ({recipes}) => {
+const RecipeList = ({
+    recipes,
+    handleAdd,
+    handleDelete
+}) => {
     return (
         <div className="recipe-list">
             <div>
@@ -10,6 +14,7 @@ const RecipeList = ({recipes}) => {
                     return(
                         <Recipe 
                             key={recipe.id}
+                            handleDelete = {handleDelete}
                             {...recipe}
                         />
 
@@ -18,7 +23,12 @@ const RecipeList = ({recipes}) => {
             }
             </div>
             <div>
-                <button className="add">Add Recipe</button>
+                <button
+                className="add"
+                onClick={handleAdd}
+                >
+                    Add Recipe
+                </button>
             </div>
         </div>
         
