@@ -1,14 +1,15 @@
-import IncredientList from "./IncredientList"
+import { useRecipeContext } from "../contexts/recipeContext"
+
 
 const Recipe = (props) => {
+    const { handleDelete } = useRecipeContext()
     const {
         id,
         name,
         servings,
         cookTime,
         instructions,
-        incredients,
-        handleDelete
+        children
     } = props
     return (
         <div>
@@ -42,7 +43,7 @@ const Recipe = (props) => {
             <div>
                 <span>Incredients:</span>
                 <div>
-                    <IncredientList incredients={incredients}/>
+                    {children}
                 </div>
             </div>
         </div>

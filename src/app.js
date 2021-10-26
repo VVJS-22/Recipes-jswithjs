@@ -1,40 +1,34 @@
 import RecipeList from './components/RecipeList'
-import sampleRecipes from './DB/recipeDB'
+import Recipe from "./components/Recipe"
+import IncredientList from "./components/IncredientList"
+import Incredient from "./components/Incredient"
 import './styles/app.css'
-import { useState } from 'react'
-import { v4 as uuidv4 } from 'uuid'
+import { useRecipeContext } from './contexts/recipeContext'
+
 
 function App() {
-  const [recipes, setRecipes] = useState(sampleRecipes)
 
-  const handleAdd = () => {
-    const newRecipe = {
-      id: uuidv4(),
-      name: 'New',
-      servings: 1,
-      cookTime: "0:30",
-      instructions: 'Instructions',
-      incredients: [
-        {
-          id: uuidv4,
-          name: 'Name',
-          amount: '1 Tbs'
-        }
-      ]
-    }
-
-    setRecipes([...recipes, newRecipe])
-    console.log(recipes)
-  }
-
-  const handleDelete = (id) => {
-    setRecipes(recipes.filter(recipe => recipe.id !== id))
-  }
-
-
+  const { recipes } = useRecipeContext()
   return (
     <>
-    <RecipeList recipes={recipes} handleAdd={handleAdd} handleDelete = {handleDelete}/>
+    <RecipeList>
+    {
+                recipes.map(recipe => {
+                    return(
+                        <Recipe 
+                            key={recipe.id}
+                            {...recipe}
+                        >
+                          <IncredientList>
+                          {recipe.incredients.map(incredient => {
+                            return <Incredient key={incredient.id} {...incredient} />
+                          })}
+                          </IncredientList>
+                        </Recipe>
+                    )
+                })
+            }
+    </RecipeList>
     </>
   );
 }

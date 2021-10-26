@@ -1,26 +1,12 @@
-import Recipe from "./Recipe"
+import { useRecipeContext } from '../contexts/recipeContext'
 
 
-const RecipeList = ({
-    recipes,
-    handleAdd,
-    handleDelete
-}) => {
+const RecipeList = ({children}) => {
+    const { handleAdd } = useRecipeContext()
     return (
         <div className="recipe-list">
             <div>
-            {
-                recipes.map(recipe => {
-                    return(
-                        <Recipe 
-                            key={recipe.id}
-                            handleDelete = {handleDelete}
-                            {...recipe}
-                        />
-
-                    )
-                })
-            }
+                {children}
             </div>
             <div>
                 <button
