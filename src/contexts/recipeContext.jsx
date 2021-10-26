@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 import { v4 as uuidv4 } from 'uuid'
 import sampleRecipes from '../DB/recipeDB'
 
@@ -6,6 +6,19 @@ const RecipeContext = createContext(null)
 
 export const RecipeProvider = ({children}) => {
     const [recipes, setRecipes] = useState(sampleRecipes)
+
+
+    const  LOCAL_STORAGE_KEY = 'recipeApp.recipes'
+
+    useEffect(() => {
+        const recipeJSON = localStorage.getItem(LOCAL_STORAGE_KEY)
+
+        if(recipeJSON != null) setRecipes(JSON.parse(recipeJSON))
+    },[])
+
+    useEffect(() => {
+        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(recipes))
+    },[recipes])
 
     const handleAdd = () => {
         const newRecipe = {
