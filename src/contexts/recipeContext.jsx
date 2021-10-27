@@ -6,7 +6,8 @@ const RecipeContext = createContext(null)
 
 export const RecipeProvider = ({children}) => {
     const [recipes, setRecipes] = useState(sampleRecipes)
-
+    const [selectedRecipeId, setSelectedRecipeId] = useState()
+    const selectedRecipe = recipes.find(recipe => recipe.id === selectedRecipeId)
 
     const  LOCAL_STORAGE_KEY = 'recipeApp.recipes'
 
@@ -44,10 +45,16 @@ export const RecipeProvider = ({children}) => {
         setRecipes(recipes.filter(recipe => recipe.id !== id))
     }
 
+    const handleRecipeSelect = (id) => {
+        setSelectedRecipeId(id)
+    }
+
     const recipeContextValue = {
         recipes,
+        selectedRecipe,
         handleAdd,
-        handleDelete
+        handleDelete,
+        handleRecipeSelect
     }
 
     return (
