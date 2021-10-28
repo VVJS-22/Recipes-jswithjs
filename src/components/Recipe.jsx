@@ -2,7 +2,7 @@ import { useRecipeContext } from "../contexts/recipeContext"
 
 
 const Recipe = (props) => {
-    const { handleDelete } = useRecipeContext()
+    const { handleDelete, handleSelect } = useRecipeContext()
     const {
         id,
         name,
@@ -17,7 +17,12 @@ const Recipe = (props) => {
                 <h3>{name}</h3>
             </div>
             <div>
-                <button className="edit">Edit</button>
+                <button className="edit"
+                onClick={() => {
+                    handleSelect(id)
+                }}
+                >
+                    Edit</button>
                 <button
                 
                 className="delete"

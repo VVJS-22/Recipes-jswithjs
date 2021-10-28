@@ -21,8 +21,8 @@ function App() {
                             {...recipe}
                         >
                           <IncredientList>
-                          {recipe.incredients.map(incredient => {
-                            return <Incredient key={incredient.id} {...incredient} />
+                          {recipe.ingredients.map(ingredient => {
+                            return <Incredient key={ingredient.id} {...ingredient} />
                           })}
                           </IncredientList>
                         </Recipe>

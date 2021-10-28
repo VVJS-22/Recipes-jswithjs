@@ -28,7 +28,7 @@ export const RecipeProvider = ({children}) => {
         servings: 1,
         cookTime: "0:30",
         instructions: 'Instructions',
-        incredients: [
+        ingredients: [
             {
             id: uuidv4,
             name: 'Name',
@@ -45,7 +45,7 @@ export const RecipeProvider = ({children}) => {
         setRecipes(recipes.filter(recipe => recipe.id !== id))
     }
 
-    const handleRecipeSelect = (id) => {
+    const handleSelect = (id) => {
         setSelectedRecipeId(id)
     }
 
@@ -54,7 +54,7 @@ export const RecipeProvider = ({children}) => {
         selectedRecipe,
         handleAdd,
         handleDelete,
-        handleRecipeSelect
+        handleSelect
     }
 
     return (

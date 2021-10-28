@@ -1,9 +1,13 @@
 import RecipeIncredientEdit from "./RecipeIncredientEdit"
 import '../styles/recipe-edit.css'
 
-const RecipeEdit = () => {
+
+
+const RecipeEdit = ({recipe}) => {
     return (
-        <section>
+        <section style={{
+            backgroundColor: "blue"
+        }}>
             <div
                 className="section__remove-button-container"
             
@@ -11,17 +15,48 @@ const RecipeEdit = () => {
                 <button>&times;</button>
             </div>
             <form>
-                <input type="text" placeholder="Name" autoComplete="none"/>
-                <input type="text" placeholder="Cook time" autoComplete="none"/>
-                <input type="number" min="1" placeholder="Servings" autoComplete="off"/>
-                <textarea name="instructions" id="instructions" placeholder="Instructions" autoComplete="off"></textarea>
+
+                <input
+                type="text" 
+                placeholder="Name" 
+                autoComplete="none"
+                id='name'
+                name='name'
+                value={recipe.name}
+                />
+
+                <input 
+                type="text" 
+                placeholder="Cook time" autoComplete="none"
+                value={recipe.cookTime}
+                />
+                <input 
+                type="number" 
+                min="1" 
+                placeholder="Servings" 
+                autoComplete="off"
+                value={recipe.servings}
+                />
+                <textarea 
+                name="instructions" 
+                id="instructions" placeholder="Instructions" autoComplete="off"
+                value={recipe.instructions}
+                ></textarea>
                 <br />
                 <label>Incredients</label>
                 <div>
-                    <div>Name</div>
-                    <div>Amount</div>
-                    <div></div>
-                    <RecipeIncredientEdit />
+                    {recipe.ingredients.map(
+                        ingredient =>  (
+                            <>
+                            <div>Name</div>
+                            <div>Amount</div>
+                            <RecipeIncredientEdit
+                            key={ingredient.id}
+                            ingredient={ingredient}
+                            />
+                            </>
+                            )
+                    )}
                 </div>
                 <div>
                     <button>Add Incredient</button>
