@@ -1,9 +1,23 @@
 import RecipeIncredientEdit from "./RecipeIncredientEdit"
 import '../styles/recipe-edit.css'
+import { useRecipeContext } from "../contexts/recipeContext"
 
 
 
 const RecipeEdit = ({recipe}) => {
+    const { handleChange } = useRecipeContext()
+
+    const handleInnerChange = (changes) => {
+        handleChange(recipe.id, {...recipe, ...changes})
+    }
+
+    const handleIngredientChange = (id, ingredient) => {
+        const newIngredients = [...recipe.ingredients]
+        const index = newIngredients.findIndex(i => i.id === id)
+        newIngredients[index] = ingredient
+        handleInnerChange({ ingredients: newIngredients})
+    }
+
     return (
         <section style={{
             backgroundColor: "blue"
@@ -23,12 +37,18 @@ const RecipeEdit = ({recipe}) => {
                 id='name'
                 name='name'
                 value={recipe.name}
+                onChange={e => handleInnerChange({
+                    name: e.target.value
+                })}
                 />
 
                 <input 
                 type="text" 
                 placeholder="Cook time" autoComplete="none"
                 value={recipe.cookTime}
+                onChange={e => handleInnerChange({
+                    cookTime: e.target.value
+                })}
                 />
                 <input 
                 type="number" 
@@ -36,11 +56,17 @@ const RecipeEdit = ({recipe}) => {
                 placeholder="Servings" 
                 autoComplete="off"
                 value={recipe.servings}
+                onChange={e => handleInnerChange({
+                    servings: e.target.value
+                })}
                 />
                 <textarea 
                 name="instructions" 
                 id="instructions" placeholder="Instructions" autoComplete="off"
                 value={recipe.instructions}
+                onChange={e => handleInnerChange({
+                    instructions: e.target.value
+                })}
                 ></textarea>
                 <br />
                 <label>Incredients</label>
@@ -53,6 +79,7 @@ const RecipeEdit = ({recipe}) => {
                             <RecipeIncredientEdit
                             key={ingredient.id}
                             ingredient={ingredient}
+                            handleIngredientChange = {handleIngredientChange}
                             />
                             </>
                             )

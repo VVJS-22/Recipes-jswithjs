@@ -45,6 +45,13 @@ export const RecipeProvider = ({children}) => {
         setRecipes(recipes.filter(recipe => recipe.id !== id))
     }
 
+    const handleChange = (id, recipe) => {
+        const newRecipes = [...recipes]
+        const index = newRecipes.findIndex(r => r.id === id)
+        newRecipes[index] = recipe
+        setRecipes(newRecipes)
+    }
+
     const handleSelect = (id) => {
         setSelectedRecipeId(id)
     }
@@ -54,7 +61,8 @@ export const RecipeProvider = ({children}) => {
         selectedRecipe,
         handleAdd,
         handleDelete,
-        handleSelect
+        handleSelect,
+        handleChange
     }
 
     return (
