@@ -1,11 +1,12 @@
 import RecipeIncredientEdit from "./RecipeIncredientEdit"
 import '../styles/recipe-edit.css'
 import { useRecipeContext } from "../contexts/recipeContext"
+import { v4 as uuidv4 } from 'uuid'
 
 
 
 const RecipeEdit = ({recipe}) => {
-    const { handleChange } = useRecipeContext()
+    const { handleChange, handleSelect } = useRecipeContext()
 
     const handleInnerChange = (changes) => {
         handleChange(recipe.id, {...recipe, ...changes})
@@ -18,15 +19,32 @@ const RecipeEdit = ({recipe}) => {
         handleInnerChange({ ingredients: newIngredients})
     }
 
+    const handleIngredientAdd = () => {
+        const newIngredient = {
+            id: uuidv4(),
+            name:  '',
+            amount: ''
+        }
+        handleInnerChange({ingredients: [...recipe.ingredients, newIngredient]})
+    }
+
+    const handleIngredientDelete = (id) => {
+        handleInnerChange({
+            ingredients: recipe.ingredients.filter(i => i.id !== id)
+        })
+    }
+
     return (
         <section style={{
-            backgroundColor: "blue"
+            backgroundColor: "#fff"
         }}>
             <div
                 className="section__remove-button-container"
             
             >
-                <button>&times;</button>
+                <button
+                onClick = { () => handleSelect(undefined)}
+                >&times;</button>
             </div>
             <form>
 
@@ -80,13 +98,22 @@ const RecipeEdit = ({recipe}) => {
                             key={ingredient.id}
                             ingredient={ingredient}
                             handleIngredientChange = {handleIngredientChange}
+                            handleIngredientDelete = {
+                                handleIngredientDelete
+                            }
                             />
                             </>
                             )
                     )}
                 </div>
                 <div>
-                    <button>Add Incredient</button>
+                    <button
+                    onClick={(e) => {
+                        e.preventDefault()
+                        handleIngredientAdd()
+                    }
+                    }
+                    >Add Incredient</button>
                 </div>
             </form>
         </section>

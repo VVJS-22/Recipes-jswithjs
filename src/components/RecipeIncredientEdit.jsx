@@ -1,6 +1,7 @@
 const RecipeIncredientEdit = ({
     ingredient,
-    handleIngredientChange
+    handleIngredientChange,
+    handleIngredientDelete
 }) => {
     const handleInnerChange = (changes) => {
         handleIngredientChange(ingredient.id, {...ingredient, ...changes})
@@ -24,7 +25,11 @@ const RecipeIncredientEdit = ({
                 amount: e.target.value
             })}
             />
-            <button>&times;</button>
+            <button
+            onClick = { () => {
+                handleIngredientDelete(ingredient.id)
+            }}
+            >&times;</button>
         </>
     )
 }
